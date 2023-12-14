@@ -10,7 +10,7 @@ appointments = [
   { 'id': "5",'doctor': "2", 'date': "22 Nov 2023", 'rating':"Good"  },
 ]
 
-#making chnages to test workflow
+#making chnages to test the workflow
 
 
 
