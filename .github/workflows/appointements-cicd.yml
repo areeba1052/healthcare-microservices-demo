@@ -45,6 +45,7 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           context: ./appointments
+          file: ./appointments/Dockerfile
           push: true
           tags: areebaasif/appointments-service:${{ env.commit_sha }} # Using commit hash for versioning
 
