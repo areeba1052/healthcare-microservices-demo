@@ -49,12 +49,14 @@ jobs:
           push: true
           tags: areebaasif/appointments-service:${{ env.commit_sha }} # Using commit hash for versioning
 
-      # Updating Docker Compose for Appointments with the new image tag
+                # Updating Docker Compose for Appointments with the new image tag
       - name: Update Docker Compose for Appointments
         run: |
-          sed -i "s|image: areebaasif/appointments-service:[^ ]*|image: areebaasif/doctors-service:${{ env.commit_sha }}|" docker-compose.yml
+          sed -i "s|image: areebaasif/appointments-service:[^ ]*|image: areebaasif/appointments-service:${{ env.commit_sha }}|" docker-compose.yml
           git config --global user.name 'areebaasif'
           git config --global user.email 'areebaasif1052@gmail.com'
           git add docker-compose.yml
           git commit -m "Update docker-compose file for appointments with new image tag"
           git push origin main
+
+
