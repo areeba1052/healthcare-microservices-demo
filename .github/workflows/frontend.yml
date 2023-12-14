@@ -1,0 +1,61 @@
+name: Frontend Workflow
+
+# Triggering the workflow on push and pull requests specifically for changes in the frontend folder
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'frontend/**'
+  pull_request:
+    branches:
+      - main
+    paths:
+      - 'frontend/**'
+
+# Permissions for the workflow
+permissions:
+  checks: write
+  contents: write
+
+# Jobs defined for the workflow
+jobs:
+  build-and-push-frontend:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v2
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v1
+
+      - name: Login to DockerHub
+        uses: docker/login-action@v1
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_PASSWORD }}
+
+      # Extracting commit SHA for versioning
+      - name: Extract commit SHA
+        run: echo "commit_sha=$(git rev-parse --short HEAD)" >> $GITHUB_ENV
+        shell: bash
+
+      # Building and Pushing Docker Image for Frontend with the respective version
+      - name: Build and Push Docker Image for Frontend
+        uses: docker/build-push-action@v2
+        with:
+          context: ./frontend
+          file: ./frontend/Dockerfile
+          push: true
+          tags: areebaasif/frontend-service:${{ env.commit_sha }} # Using commit hash for versioning
+
+              
+      - name: Update Docker Compose for Frontend
+        run: |
+          
+          sed -i "s|image: areebaasif/frontend-service.*|image: areebaasif/frontend-service:${{ env.commit_sha }}|" docker-compose.yml
+          git config --global user.name 'areebaasif'
+          git config --global user.email 'areebaasif1052@gmail.com'
+          git add docker-compose.yml
+          git commit -m "Update docker-compose file for frontend with new image tag"
+          git push origin main
