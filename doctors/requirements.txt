@@ -1,0 +1,4 @@
+Flask
+pymango
+flask-cors
+python-dotenv
