@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: appointments
-        image: areebaasif/appointments-service
+        image: areebaasif/appointments-service:098403b
         ports:
         - containerPort: 7070
         env:

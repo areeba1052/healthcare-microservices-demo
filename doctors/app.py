@@ -6,6 +6,10 @@ doctors = [
   { 'id': "2",'firstName': "Good", 'lastName': "Doctor",'speciality':"Test"  }
 ]
 
+@app.route('/health', methods=['GET'])
+def health_check():
+    return 'OK', 200
+
 @app.route('/hello')
 def hello():
   greeting = "Hello world!"
