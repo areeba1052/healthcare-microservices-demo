@@ -12,7 +12,9 @@ appointments = [
 
 #MAKING the CHANGES 
 
-
+@app.route('/health', methods=['GET'])
+def health_check():
+    return 'OK', 200
 
 @app.route('/hello')
 def hello():
