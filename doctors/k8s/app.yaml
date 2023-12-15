@@ -1,14 +1,4 @@
-apiVersion: v1
-kind: Secret
-metadata:
-  name: appointment
-type: Opaque
-data:
-  mongo-uri: bW9uZ29kYjovL21vbmdvLXNlcnZpY2U6MjcwMTc=
-  NAME: YXJlZWJhIGFzaWY=
-  PASSWORD: aGVsbG8gd29ybGQ=
 
----
 apiVersion: v1
 kind: ConfigMap
 metadata:
@@ -20,22 +10,22 @@ data:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: appointments-deployment
+  name: doctors-deployment
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: appointments
+      app: doctors
   template:
     metadata:
       labels:
-        app: appointments
+        app: doctors
     spec:
       containers:
-        - name: appointments
-          image: areebaasif/appointments-service:098403b
+        - name: doctors
+          image: areebaasif/doctors-service:1b047cc
           ports:
-            - containerPort: 7070
+            - containerPort: 9090
           resources:
             requests:
               memory: "128Mi"
@@ -47,34 +37,34 @@ spec:
             - name: MONGO_URI
               valueFrom:
                 secretKeyRef:
-                  name: appointment
+                  name: doctors
                   key: mongo-uri
             - name: MONGO_DB_NAME
               valueFrom:
                 configMapKeyRef:
-                  name: appointment-config
+                  name: doctors-config
                   key: MONGO_DB_NAME
             - name: NAME
               valueFrom:
                 secretKeyRef:
-                  name: appointment
+                  name: doctors
                   key: NAME
             - name: PASSWORD
               valueFrom:
                 secretKeyRef:
-                  name: appointment
+                  name: doctors
                   key: PASSWORD
           readinessProbe:
             failureThreshold: 3
             httpGet:
               path: /health
-              port: 7070
+              port: 9090
             initialDelaySeconds: 5
             periodSeconds: 10
           livenessProbe:
             httpGet:
               path: /health
-              port: 7070
+              port: 9090
             initialDelaySeconds: 15
             failureThreshold: 2
             periodSeconds: 20
@@ -83,11 +73,18 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: appointments-service
+  name: doctors-service
 spec:
   selector:
-    app: appointments
+    app: doctors
   ports:
     - protocol: TCP
-      port: 7070
-      targetPort: 7070
+      port: 9090
+      targetPort: 9090
+
+#BONUS QUESTION
+apiVersion: v1 kind: ConfigMap metadata: 
+  name: doctors data: 
+  details.txt: | 
+    Hi! i200538 here who has been doing devops project for a long time now!
+    
