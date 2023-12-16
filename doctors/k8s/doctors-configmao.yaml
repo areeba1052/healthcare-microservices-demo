@@ -1,0 +1,6 @@
+#BONUS QUESTION
+apiVersion: v1 kind: ConfigMap metadata: 
+  name: doctors data: 
+  details.txt: | 
+    Hi! i200538 here who has been doing devops project for a long time now!
+    

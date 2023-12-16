@@ -1,4 +1,3 @@
-
 apiVersion: v1
 kind: ConfigMap
 metadata:
@@ -68,6 +67,14 @@ spec:
             initialDelaySeconds: 15
             failureThreshold: 2
             periodSeconds: 20
+      volumeMounts:
+        - name: details-volume
+          mountPath: /user/details.txt
+          subPath: details.txt
+      volumes:
+        - name: details-volume
+          configMap:
+            name: doctors
 
 ---
 apiVersion: v1
@@ -81,10 +88,3 @@ spec:
     - protocol: TCP
       port: 9090
       targetPort: 9090
-
-#BONUS QUESTION
-apiVersion: v1 kind: ConfigMap metadata: 
-  name: doctors data: 
-  details.txt: | 
-    Hi! i200538 here who has been doing devops project for a long time now!
-    
