@@ -12,7 +12,7 @@ services:
       - app-network
 
   doctors:
-    image: areebaasif/doctors-service:9bbe44b
+    image: areebaasif/doctors-service:8475015
     build: ./doctors
     ports:
       - "9090:9090"
