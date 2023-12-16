@@ -1,14 +1,14 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: appointment-config
+  name: doctors-config
 data:
   MONGO_DB_NAME: "database"
 
 apiVersion: v1
 kind: Secret
 metadata:
-  name: appointment
+  name: doctors
 type: Opaque
 data:
   mongo-uri: bW9uZ29kYjovL21vbmdvLXNlcnZpY2U6MjcwMTc=
