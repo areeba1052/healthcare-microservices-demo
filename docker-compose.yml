@@ -22,7 +22,7 @@ services:
       - app-network
 
   frontend:
-    image: areebaasif/frontend-service:201e096
+    image: areebaasif/frontend-service:f399b7a
     build: ./frontend
     ports:
       - "3000:3000"
