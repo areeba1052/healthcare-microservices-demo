@@ -76,4 +76,3 @@ Each microservice has:
 
 ---
 
-> 🎓 *Developed as part of MLOps/DevOps coursework and evolved into a complete microservices showcase.*
