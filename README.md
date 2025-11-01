@@ -31,8 +31,6 @@ All services are containerized and deployed via automated CI/CD pipelines.
 ---
 
 
----
-
 ## 🚀 Features
 
 - 🔹 **Microservices architecture** for modular scalability  
