@@ -30,7 +30,7 @@ All services are containerized and deployed via automated CI/CD pipelines.
 
 ---
 
-## 🧱 Project Structure
+## 🗂️ Project Structure
 
 .github/workflows/
 │ ├── appointments-cicd.yml
@@ -50,6 +50,8 @@ frontend/
 │ └── k8s/app.yaml
 docker-compose.yml
 requirements.txt
+
+
 ---
 
 ## 🚀 Features
@@ -73,6 +75,3 @@ Each microservice has:
 ## 👩‍💻 Author
 
 **Areeba Asif**  
-
----
-
